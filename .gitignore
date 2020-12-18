@@ -42,4 +42,4 @@ migrations
 db.sqlite3
 
 # media
-media
+media/avatar

@@ -9,9 +9,37 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>React App</title>
+    <style>
+      /* width */
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script>
+      // Console warning
+      const warningTitleCSS = 'color:red; font-size:60px; font-weight: bold; -webkit-text-stroke: 1px black;';
+      const warningDescCSS = 'font-size: 18px;';
+      console.log('%cStop!', warningTitleCSS);
+      console.log(
+        `%cThis is a browser feature intended for developers. If someone told you to copy and paste something here to enable a Freelancer feature or "hack" someone's account, it is a scam and will give them access to your Freelancer account.`,
+        warningDescCSS,
+      );
+    </script>
   </body>
 </html>

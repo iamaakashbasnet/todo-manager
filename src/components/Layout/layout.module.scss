@@ -1,0 +1,16 @@
+.flexContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .flexWrapper {
+    flex-grow: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  // Mobile screen having problem with 100vh
+  .flexContainer {
+    min-height: 90vh;
+  }
+}

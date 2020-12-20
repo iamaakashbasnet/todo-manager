@@ -1,0 +1,17 @@
+@import 'styles/_variables';
+
+.navbar {
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
+
+.navbarBrand {
+  text-decoration: none;
+  color: $primary;
+  font-size: 1.3rem;
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    border-bottom: 2px solid $primary;
+  }
+}

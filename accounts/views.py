@@ -29,13 +29,7 @@ class SignupView(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        return Response(
-            {
-                'status': 'success',
-                'result': UserSerializer(user, context=self.get_serializer_context()).data,
-                'message': 'Signup successful'
-            }
-        )
+        return Response(UserSerializer(user, context=self.get_serializer_context()).data)
 
 
 @method_decorator(ensure_csrf_cookie, name='dispatch')
@@ -50,29 +44,18 @@ class LoginView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         login(request, user)
-        return Response(
-            {
-                'status': 'success',
-                'result': UserSerializer(user, context=self.get_serializer_context()).data,
-                'message': 'Login successful'
-            }
-        )
+        return Response(UserSerializer(user, context=self.get_serializer_context()).data)
 
 
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class LogoutView(APIView):
     """Logout View
     """
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         logout(request)
-        return Response(
-            {
-                'status': 'success',
-                'result': None,
-                'message': 'Logout successful'
-            }
-        )
+        return Response(status=status.HTTP_200_OK)
 
 
 class IsAuthenticatedView(APIView):
@@ -83,19 +66,8 @@ class IsAuthenticatedView(APIView):
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return Response(
-                {
-                    'status': 'success',
-                    'result': UserSerializer(request.user).data,
-                    'message': 'User authenticated'
-                },
+                UserSerializer(request.user).data,
                 status=status.HTTP_200_OK
             )
         else:
-            return Response(
-                {
-                    'status': 'error',
-                    'result': None,
-                    'message': 'Authentication failed'
-                },
-                status=status.HTTP_401_UNAUTHORIZED
-            )
+            return Response(status=status.HTTP_401_UNAUTHORIZED)

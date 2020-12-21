@@ -4,7 +4,7 @@ import styles from './footer.module.scss';
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <p>Todo Manager</p>
+      <p>Copyright &copy; 2020 Todo Manager</p>
       <small>an Aakash Basnet Production</small>
     </footer>
   );

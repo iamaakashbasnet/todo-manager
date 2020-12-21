@@ -9,15 +9,13 @@ interface Props {
 
 const Layout: React.FC<Props> = ({children}) => {
   return (
-    <>
-      <div className={styles.flexContainer}>
+    <div className={styles.wrapper}>
+      <div className={styles.content}>
         <Header />
-        <div className={styles.flexWrapper}>
-          <div className="my-4">{children}</div>
-        </div>
-        <Footer />
+        {children}
       </div>
-    </>
+      <Footer />
+    </div>
   );
 };
 

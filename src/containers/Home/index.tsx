@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import Layout from 'components/Layout';
 import showcase from 'assets/showcase.jpg';
+import {useUser, useUserUpdate} from 'contexts/UserContext';
 import styles from './home.module.scss';
 
 const Home: React.FC = () => {
+  const user = useUser();
+  const updateUser = useUserUpdate();
+
+  console.log(user);
+
   return (
     <Layout>
       <div className={styles.showcaseWrapper}>

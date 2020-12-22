@@ -12,7 +12,7 @@ const Layout: React.FC<Props> = ({children}) => {
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <Header />
-        {children}
+        <div className="container">{children}</div>
       </div>
       <Footer />
     </div>

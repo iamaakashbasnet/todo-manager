@@ -1,18 +1,53 @@
-import React from 'react';
-import Layout from 'components/Layout';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+import Layout from 'components/Layout';
+import {useUser} from 'contexts/UserContext';
 
 const Login = () => {
+  const user = useUser();
+  const [state, setState] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e: any) => {
+    setState((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    user.login(state.email, state.password);
+  };
+
+  console.log(user);
+
   return (
     <Layout>
       <div className="mt-5">
         <h3>Login</h3>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="row">
-            <input className="u-full-width" type="email" name="email" id="email" placeholder="Email address" />
+            <input
+              className="u-full-width"
+              type="email"
+              name="email"
+              id="email"
+              onChange={handleChange}
+              placeholder="Email address"
+            />
           </div>
           <div className="row">
-            <input className="u-full-width" type="password" name="password" id="password" placeholder="Password" />
+            <input
+              className="u-full-width"
+              type="password"
+              name="password"
+              id="password"
+              onChange={handleChange}
+              placeholder="Password"
+            />
           </div>
           <div className="row">
             <button className="button-primary mr-5">Login</button>

@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import {UserProvider} from 'contexts/UserContext';
+import {UserProvider, useUser} from 'contexts/UserContext';
 
 import Home from './Home';
 import Login from './Login';
 import Signup from './Signup';
 
 const App: React.FC = () => {
+  const user = useUser();
+
+  useEffect(() => {
+    console.log(user);
+    user.authCheck();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <UserProvider>
       <BrowserRouter>

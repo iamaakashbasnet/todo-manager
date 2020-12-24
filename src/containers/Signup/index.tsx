@@ -1,8 +1,13 @@
 import React from 'react';
+import {Link, Redirect} from 'react-router-dom';
 import Layout from 'components/Layout';
-import {Link} from 'react-router-dom';
+import {useUser} from 'contexts/UserContext';
 
 const Signup = () => {
+  const user = useUser();
+  if (user.isAuthenticated) {
+    return <Redirect to="/dashboard/" />;
+  }
   return (
     <Layout>
       <div className="mt-5">

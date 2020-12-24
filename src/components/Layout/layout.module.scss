@@ -7,3 +7,21 @@
 .content {
   flex-grow: 1;
 }
+
+.preloader {
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 99999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow-y: hidden;
+  opacity: 0.8;
+}

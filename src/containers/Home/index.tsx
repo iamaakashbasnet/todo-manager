@@ -1,9 +1,17 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import Layout from 'components/Layout';
 import showcase from 'assets/showcase.jpg';
+import {useUser} from 'contexts/UserContext';
 import styles from './home.module.scss';
 
 const Home: React.FC = () => {
+  const user = useUser();
+
+  if (user.isAuthenticated) {
+    return <Redirect to="/dashboard/" />;
+  }
+
   return (
     <Layout>
       <div className={styles.showcaseWrapper}>

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {HelmetProvider} from 'react-helmet-async';
 import axios from 'axios';
 import 'styles/index.scss';
+import {UserProvider} from 'contexts/UserContext';
 import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 
@@ -13,9 +14,11 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 ReactDOM.render(
   <React.StrictMode>
-    <HelmetProvider>
-      <App />
-    </HelmetProvider>
+    <UserProvider>
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

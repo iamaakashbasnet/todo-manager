@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Layout from 'components/Layout';
 import {useUser} from 'contexts/UserContext';
 
@@ -22,7 +22,9 @@ const Login = () => {
     user.login(state.email, state.password);
   };
 
-  console.log(user);
+  if (user.isAuthenticated) {
+    return <Redirect to="/dashboard/" />;
+  }
 
   return (
     <Layout>

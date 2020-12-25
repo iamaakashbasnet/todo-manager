@@ -2,7 +2,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework import (
     generics,
-    permissions
+    permissions,
 )
 from todos.models import Todo
 from .serializers import TodoSerializer
@@ -27,6 +27,9 @@ class TodoCreateView(generics.CreateAPIView):
     serializer_class = TodoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 
 @method_decorator(ensure_csrf_cookie, name='dispatch')
 class TodoDetailView(generics.RetrieveAPIView):
@@ -45,6 +48,7 @@ class TodoDeleteView(generics.DestroyAPIView):
     """
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = TodoSerializer
+    queryset = Todo.objects.all()
 
 
 @method_decorator(ensure_csrf_cookie, name='dispatch')

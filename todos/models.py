@@ -10,8 +10,6 @@ class Todo(models.Model):
     """
     title = models.CharField(
         verbose_name='Todo title', max_length=120)
-    completed = models.BooleanField(
-        verbose_name='Todo Completed', default=False)
     date_created = models.DateTimeField(
         verbose_name='Time of creation', auto_now_add=True)
     author = models.ForeignKey(

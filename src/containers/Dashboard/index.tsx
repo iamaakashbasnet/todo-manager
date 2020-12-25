@@ -67,26 +67,17 @@ const Dashboard = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    if (editing) {
-      const body = JSON.stringify({title: todo});
-      console.log(body);
-      axios
-        .patch(`/todos/update/${todoID}/`, body)
-        .then((res) => {
-          fetchTodos();
-          setEditing(false);
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      const body = JSON.stringify({title: todo});
-      axios.post('/todos/create/', body).then(() => {
-        fetchTodos();
-        setTodo('');
-      });
-    }
+    const body = JSON.stringify({title: todo});
+    axios({
+      data: body,
+      method: editing ? 'patch' : 'post',
+      url: editing ? `/todos/update/${todoID}/` : `/todos/create/`,
+    }).then((res) => {
+      fetchTodos();
+      setEditing(false);
+      setTodo('');
+      console.log(res.data);
+    });
   };
 
   const deleteTodo = (id: any) => {

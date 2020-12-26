@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import Layout from 'components/Layout';
 import {useUser} from 'contexts/UserContext';
+import Seo from 'utils/Seo';
 
 const Login = () => {
   const user = useUser();
@@ -28,6 +29,7 @@ const Login = () => {
 
   return (
     <Layout>
+      <Seo title="Login" />
       <div className="mt-5">
         <h3>Login</h3>
         <form onSubmit={handleSubmit}>

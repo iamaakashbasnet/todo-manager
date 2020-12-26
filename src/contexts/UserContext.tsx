@@ -11,6 +11,7 @@ interface User {
   loading: boolean;
   login: (email: string, password: string) => void;
   logout: () => void;
+  signup: (first_name: string, last_name: string, email: string, username: string, password: string) => void;
   user: any;
 }
 
@@ -20,6 +21,7 @@ export const UserContext = React.createContext<User>({
   loading: true,
   login: () => {},
   logout: () => {},
+  signup: () => {},
   user: null,
 });
 
@@ -78,6 +80,20 @@ export const UserProvider: React.FC<Props> = ({children}) => {
       });
   };
 
+  const signup = (first_name: string, last_name: string, email: string, username: string, password: string) => {
+    const body = JSON.stringify({email, first_name, last_name, password, username});
+    axios
+      .post('/accounts/signup/', body)
+      .then(() => {
+        // eslint-disable-next-line no-alert
+        alert('Account created now you can login!');
+      })
+      .catch(() => {
+        // eslint-disable-next-line no-alert
+        alert('Something went wrong!');
+      });
+  };
+
   const logout = () => {
     dispatch({type: ACTIONS.USER_LOADING});
     axios.post('/accounts/logout/').then(() => {
@@ -97,5 +113,5 @@ export const UserProvider: React.FC<Props> = ({children}) => {
       });
   };
 
-  return <UserContext.Provider value={{authCheck, login, logout, ...state}}>{children} </UserContext.Provider>;
+  return <UserContext.Provider value={{authCheck, login, logout, signup, ...state}}>{children} </UserContext.Provider>;
 };

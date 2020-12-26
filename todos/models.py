@@ -12,6 +12,7 @@ class Todo(models.Model):
         verbose_name='Todo title', max_length=120)
     date_created = models.DateTimeField(
         verbose_name='Time of creation', auto_now_add=True)
+    completed = models.BooleanField(verbose_name='Todo status', default=False)
     author = models.ForeignKey(
         User, verbose_name='User', on_delete=models.CASCADE)
 

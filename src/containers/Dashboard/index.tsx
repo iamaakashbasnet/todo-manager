@@ -1,8 +1,11 @@
 import React, {useEffect, useReducer, useState} from 'react';
 import axios from 'axios';
 import Layout from 'components/Layout';
+import Seo from 'utils/Seo';
+import {useUser} from 'contexts/UserContext';
 
 const Dashboard = () => {
+  const user = useUser();
   const ACTIONS = {
     TODOS_LOADED: 'TODO_LOADED',
     TODOS_LOADING: 'TODO_LOADING',
@@ -92,9 +95,18 @@ const Dashboard = () => {
     setEditing(true);
   };
 
+  const handleComplete = (taskID: number, taskStatus: boolean) => {
+    const body = JSON.stringify({completed: !taskStatus});
+    axios.patch(`/todos/update/${taskID}/`, body).then(() => {
+      fetchTodos();
+    });
+  };
+
   return (
     <Layout>
+      <Seo title="Dashboard" />
       <h3 className="mt-5">Dashboard</h3>
+      <small>Welcome {`${user.user.first_name} ${user.user.last_name}`}</small>
       <div className="card">
         <div className="card-header d-flex flex-row justify-content-center align-items-center text-center">
           <form
@@ -133,7 +145,15 @@ const Dashboard = () => {
               ) : (
                 state.todos.map((task: any) => (
                   <tr key={task.id}>
-                    <td>{task.title}</td>
+                    <td>
+                      <span style={{textDecoration: task.completed && 'line-through'}}>{task.title}</span>
+                      <input
+                        type="checkbox"
+                        onChange={() => handleComplete(task.id, task.completed)}
+                        className="ml-3"
+                        checked={!!task.completed}
+                      />
+                    </td>
                     <td className="d-flex justify-content-center align-items-center">
                       <button className="button-primary" onClick={() => editTodo(task.id, task.title)}>
                         Edit

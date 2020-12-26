@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom';
 import Layout from 'components/Layout';
 import showcase from 'assets/showcase.jpg';
 import {useUser} from 'contexts/UserContext';
+import Seo from 'utils/Seo';
 import styles from './home.module.scss';
 
 const Home: React.FC = () => {
@@ -14,6 +15,7 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
+      <Seo title="Todo Manager" />
       <div className={styles.showcaseWrapper}>
         <h1>Minimalist Online Todo Manager</h1>
         <p>Login ○ Add Todo ○ Logout</p>

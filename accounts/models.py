@@ -47,7 +47,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(verbose_name='Last Name', max_length=30)
     avatar = models.ImageField(
         verbose_name='Avatar/Profile Picture', default='default.png', upload_to='avatar')
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)

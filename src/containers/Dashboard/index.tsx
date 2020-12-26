@@ -65,18 +65,17 @@ const Dashboard = () => {
     setTodo(e.target.value);
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: any, editing_: boolean) => {
     e.preventDefault();
     const body = JSON.stringify({title: todo});
     axios({
       data: body,
-      method: editing ? 'patch' : 'post',
-      url: editing ? `/todos/update/${todoID}/` : `/todos/create/`,
-    }).then((res) => {
+      method: editing_ ? 'patch' : 'post',
+      url: editing_ ? `/todos/update/${todoID}/` : `/todos/create/`,
+    }).then(() => {
       fetchTodos();
       setEditing(false);
       setTodo('');
-      console.log(res.data);
     });
   };
 
@@ -98,7 +97,11 @@ const Dashboard = () => {
       <h3 className="mt-5">Dashboard</h3>
       <div className="card">
         <div className="card-header d-flex flex-row justify-content-center align-items-center text-center">
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e, editing);
+            }}
+          >
             <input
               className="u-full-width"
               type="text"

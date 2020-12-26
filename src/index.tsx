@@ -11,6 +11,7 @@ import reportWebVitals from './reportWebVitals';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.patch['Content-Type'] = 'application/json';
 
 ReactDOM.render(
   <React.StrictMode>

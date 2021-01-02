@@ -5,7 +5,9 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <p>Copyright &copy; 2020 Todo Manager</p>
-      <small>an Aakash Basnet Production</small>
+      <small>
+        an <a href="https://iamaakashbasnet.github.io">Aakash Basnet Production</a>
+      </small>
     </footer>
   );
 };
